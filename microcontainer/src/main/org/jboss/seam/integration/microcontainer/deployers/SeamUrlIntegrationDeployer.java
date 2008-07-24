@@ -52,7 +52,7 @@ public class SeamUrlIntegrationDeployer extends PathUrlIntegrationDeployer<JBoss
    {
       try
       {
-         String url = "${jboss.home}/integration/seam/jboss-seam-int-jbossas.jar";
+         String url = "${jboss.home.url}/integration/seam/jboss-seam-int-jbossas.jar";
          url = StringPropertyReplacer.replaceProperties(url);
          return new URL(url);
       }
