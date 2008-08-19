@@ -1,4 +1,4 @@
-package org.jboss.seam.integration.jbossas;
+package org.jboss.seam.integration.jbossas.vfs;
 
 
 import java.io.File;
@@ -38,7 +38,6 @@ public class VFSScanner extends AbstractScanner
     */
    protected static VirtualFile getRoot(URL url, int parentDepth) throws IOException
    {
-
       log.trace("Root url: " + url);
 
       String urlString = url.toString();

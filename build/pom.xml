@@ -19,14 +19,15 @@
   </scm>
 
   <properties>
-    <version.jboss.man>2.0.0.Beta12</version.jboss.man>
-    <version.jboss.microcontainer>2.0.0-SNAPSHOT</version.jboss.microcontainer>
-    <version.jboss.deployers>2.0.0-SNAPSHOT</version.jboss.deployers>
+    <version.jboss.seam>2.0.3.CR1</version.jboss.seam>
+    <version.jboss.man>2.0.0.Beta13</version.jboss.man>
+    <version.jboss.microcontainer>2.0.0.Beta17</version.jboss.microcontainer>
+    <version.jboss.deployers>2.0.0.Beta20</version.jboss.deployers>
     <version.jboss.common.core>2.2.5.GA</version.jboss.common.core>
     <version.jboss.logging.spi>2.0.5.GA</version.jboss.logging.spi>
     <version.jboss.classloading.spi>5.0.0.Beta4</version.jboss.classloading.spi>
-    <version.jboss.vfs>2.0.0.Beta20</version.jboss.vfs>
-    <version.jboss.metadata>1.0.0.Beta29</version.jboss.metadata>
+    <version.jboss.vfs>2.0.0.Beta21</version.jboss.vfs>
+    <version.jboss.metadata>1.0.0.Beta35</version.jboss.metadata>
     <version.jbossxb>2.0.0.CR8</version.jbossxb>
     <version.org.jboss.test>1.1.0.GA</version.org.jboss.test>
     <version.junit>4.4</version.junit>
@@ -300,6 +301,12 @@
         <groupId>org.jboss.metadata</groupId>
         <artifactId>jboss-metadata</artifactId>
         <version>${version.jboss.metadata}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jboss.seam</groupId>
+        <artifactId>jboss-seam</artifactId>
+        <version>${version.jboss.seam}</version>
       </dependency>
 
       <!-- test dependencies -->

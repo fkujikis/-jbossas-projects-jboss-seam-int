@@ -21,24 +21,23 @@
 */
 package org.jboss.seam.integration.microcontainer.deployers;
 
-import java.net.URL;
 import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.jboss.deployers.vfs.plugins.classloader.PathUrlIntegrationDeployer;
-import org.jboss.metadata.web.jboss.JBossWebMetaData;
 import org.jboss.util.StringPropertyReplacer;
 
 /**
  * Seam integration deployer.
  *
+ * @param <T> exact input type
  * @author <a href="mailto:ales.justin@jboss.com">Ales Justin</a>
  */
-public class SeamUrlIntegrationDeployer extends PathUrlIntegrationDeployer<JBossWebMetaData>
+public abstract class SeamUrlIntegrationDeployer<T> extends PathUrlIntegrationDeployer<T>
 {
-   public SeamUrlIntegrationDeployer()
+   protected SeamUrlIntegrationDeployer(Class<T> input)
    {
-      // we only look at wars
-      super(JBossWebMetaData.class);
+      super(input);
       setIntegrationURL(getURL());
       setFiles(new String[]{"seam.properties", "META-INF/seam.properties", "META-INF/components.xml"});
    }
@@ -52,13 +51,45 @@ public class SeamUrlIntegrationDeployer extends PathUrlIntegrationDeployer<JBoss
    {
       try
       {
-         String url = "${jboss.home.url}/integration/seam/jboss-seam-int-jbossas.jar";
+         String url = getJBossHome() + getIntegrationPath() + getIntegrationJar();
          url = StringPropertyReplacer.replaceProperties(url);
+         if (log.isTraceEnabled())
+            log.trace("Seam integration url: " + url);
          return new URL(url);
       }
       catch (MalformedURLException e)
       {
          throw new IllegalArgumentException("Unexpected error: " + e);
       }
+   }
+
+   /**
+    * Get JBoss home.
+    *
+    * @return the jboss home location
+    */
+   protected String getJBossHome()
+   {
+      return "${jboss.home.url}/";
+   }
+
+   /**
+    * Get the integration path.
+    *
+    * @return the integration path
+    */
+   protected String getIntegrationPath()
+   {
+      return "integration/seam/";
+   }
+
+   /**
+    * Get the integration jar.
+    *
+    * @return the integration jar
+    */
+   protected String getIntegrationJar()
+   {
+      return "jboss-seam-int-jbossas.jar";
    }
 }
