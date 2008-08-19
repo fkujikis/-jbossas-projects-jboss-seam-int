@@ -29,6 +29,7 @@
     <version.jboss.vfs>2.0.0.Beta21</version.jboss.vfs>
     <version.jboss.metadata>1.0.0.Beta35</version.jboss.metadata>
     <version.jbossxb>2.0.0.CR8</version.jbossxb>
+    <version.servlet.api>2.5</version.servlet.api>
     <version.org.jboss.test>1.1.0.GA</version.org.jboss.test>
     <version.junit>4.4</version.junit>
   </properties>
@@ -309,7 +310,14 @@
         <version>${version.jboss.seam}</version>
       </dependency>
 
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>servlet-api</artifactId>
+        <version>${version.servlet.api}</version>
+      </dependency>
+
       <!-- test dependencies -->
+
       <dependency>
         <groupId>org.jboss.test</groupId>
         <artifactId>jboss-test</artifactId>

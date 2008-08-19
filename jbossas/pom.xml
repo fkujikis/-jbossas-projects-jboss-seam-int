@@ -38,6 +38,11 @@
     </dependency>
     
     <dependency>
+      <groupId>org.jboss.deployers</groupId>
+      <artifactId>jboss-deployers-vfs-spi</artifactId>
+    </dependency>
+
+    <dependency>
       <groupId>org.jboss.microcontainer</groupId>
       <artifactId>jboss-dependency</artifactId>
       <exclusions>
@@ -171,8 +176,12 @@
     <dependency>
      <groupId>org.jboss</groupId>
      <artifactId>jboss-vfs</artifactId>
-   </dependency>
+    </dependency>
     
-    
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+    </dependency>
+
   </dependencies>  
 </project>
