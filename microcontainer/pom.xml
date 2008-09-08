@@ -8,7 +8,6 @@
   <artifactId>jboss-seam-int-microcontainer</artifactId>
   <packaging>jar</packaging>
   <name>JBoss Seam Int Microcontainer</name>
-  <url>http://www.jboss.com/products/jbossmc</url>
   <description>JBoss Seam Int Microcontainer</description>
   <build>
     <testResources>

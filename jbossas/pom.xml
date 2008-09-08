@@ -8,15 +8,7 @@
   <artifactId>jboss-seam-int-jbossas</artifactId>
   <packaging>jar</packaging>
   <name>JBoss Seam Int JBossAS</name>
-  <url>http://www.jboss.com/products/jbossmc</url>
   <description>JBoss Seam Int JBossAS</description>
-  <build>
-    <testResources>
-      <testResource>
-        <directory>src/resources/tests</directory>
-      </testResource>
-    </testResources>
-  </build>
   
   <!-- Do not add version information here, use ../build/pom.xml instead -->
   <dependencies>
