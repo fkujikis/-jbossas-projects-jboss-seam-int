@@ -2,7 +2,7 @@
   <parent>
     <groupId>org.jboss.seam.integration</groupId>
     <artifactId>jboss-seam-int</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>5.0.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>jboss-seam-int-jbossas</artifactId>
@@ -43,8 +43,8 @@
           <artifactId>jboss-common-core</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>jboss</groupId>
-          <artifactId>jboss-common-logging-spi</artifactId>
+          <groupId>org.jboss.logging</groupId>
+          <artifactId>jboss-logging-spi</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -63,8 +63,8 @@
           <artifactId>jboss-common-core</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>jboss</groupId>
-          <artifactId>jboss-common-logging-spi</artifactId>
+          <groupId>org.jboss.logging</groupId>
+          <artifactId>jboss-logging-spi</artifactId>
         </exclusion>
         <exclusion>
           <groupId>org.jboss</groupId>
@@ -87,8 +87,8 @@
           <artifactId>jboss-common-core</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>jboss</groupId>
-          <artifactId>jboss-common-logging-spi</artifactId>
+          <groupId>org.jboss.logging</groupId>
+          <artifactId>jboss-logging-spi</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -107,8 +107,8 @@
           <artifactId>jboss-common-core</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>jboss</groupId>
-          <artifactId>jboss-common-logging-spi</artifactId>
+          <groupId>org.jboss.logging</groupId>
+          <artifactId>jboss-logging-spi</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -124,12 +124,12 @@
           <artifactId>jboss-common-core</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>jboss</groupId>
-          <artifactId>jboss-common-logging-spi</artifactId>
+          <groupId>org.jboss.logging</groupId>
+          <artifactId>jboss-logging-spi</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>jboss</groupId>
-          <artifactId>jboss-common-logging-log4j</artifactId>
+          <groupId>org.jboss.logging</groupId>
+          <artifactId>jboss-logging-log4j</artifactId>
         </exclusion>
         <exclusion>
           <groupId>jboss.profiler.jvmti</groupId>

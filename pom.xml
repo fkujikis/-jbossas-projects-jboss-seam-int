@@ -7,7 +7,7 @@
   </parent>
   <groupId>org.jboss.seam.integration</groupId>
   <artifactId>jboss-seam-int</artifactId>
-  <version>2.0.0-SNAPSHOT</version>
+  <version>5.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>JBoss Seam Int Aggregator</name>
   <url>http://www.jboss.org/jbossmc/</url>
@@ -27,18 +27,19 @@
   </modules>
   
   <properties>
-    <version.jboss.seam>2.0.3.CR1</version.jboss.seam>
-    <version.jboss.man>2.0.0.Beta13</version.jboss.man>
+    <version.jboss.seam>2.1.0.BETA1</version.jboss.seam>
+    <version.jboss.man>2.0.0.CR1</version.jboss.man>
     <version.jboss.microcontainer>2.0.0.Beta17</version.jboss.microcontainer>
     <version.jboss.deployers>2.0.0.Beta21</version.jboss.deployers>
+    <version.jboss.cl>2.0.0.Beta13</version.jboss.cl>
     <version.jboss.common.core>2.2.5.GA</version.jboss.common.core>
     <version.jboss.logging.spi>2.0.5.GA</version.jboss.logging.spi>
-    <version.jboss.classloading.spi>5.0.0.Beta4</version.jboss.classloading.spi>
+    <version.jboss.classloading.spi>5.0.0.CR2</version.jboss.classloading.spi>
     <version.jboss.vfs>2.0.0.Beta22</version.jboss.vfs>
-    <version.jboss.metadata>1.0.0.Beta35</version.jboss.metadata>
-    <version.jbossxb>2.0.0.CR9</version.jbossxb>
+    <version.jboss.metadata>1.0.0.Beta38</version.jboss.metadata>
+    <version.jbossxb>2.0.0.CR12</version.jbossxb>
     <version.servlet.api>2.5</version.servlet.api>
-    <version.org.jboss.test>1.1.0.GA</version.org.jboss.test>
+    <version.org.jboss.test>1.1.1.GA</version.org.jboss.test>
     <version.junit>4.4</version.junit>
   </properties>
 
@@ -238,19 +239,19 @@
       <dependency>
         <groupId>org.jboss.cl</groupId>
         <artifactId>jboss-classloader</artifactId>
-        <version>${project.version}</version>
+        <version>${version.jboss.cl}</version>
       </dependency>
       
       <dependency>
         <groupId>org.jboss.cl</groupId>
         <artifactId>jboss-classloading</artifactId>
-        <version>${project.version}</version>
+        <version>${version.jboss.cl}</version>
       </dependency>
       
       <dependency>
         <groupId>org.jboss.cl</groupId>
         <artifactId>jboss-classloading-vfs</artifactId>
-        <version>${project.version}</version>
+        <version>${version.jboss.cl}</version>
       </dependency>
       
       <dependency>
@@ -284,7 +285,7 @@
       </dependency>
 
       <dependency>
-        <groupId>org.jboss</groupId>
+        <groupId>org.jboss.integration</groupId>
         <artifactId>jboss-classloading-spi</artifactId>
         <version>${version.jboss.classloading.spi}</version>
       </dependency>
