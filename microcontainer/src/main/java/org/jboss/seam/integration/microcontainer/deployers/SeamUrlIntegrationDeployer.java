@@ -51,7 +51,7 @@ public abstract class SeamUrlIntegrationDeployer<T> extends PathUrlIntegrationDe
    {
       try
       {
-         String url = getJBossHome() + getIntegrationPath() + getIntegrationJar();
+         String url = getServerHome() + getOptionalLib() + getIntegrationJar();
          url = StringPropertyReplacer.replaceProperties(url);
          if (log.isTraceEnabled())
             log.trace("Seam integration url: " + url);
@@ -64,23 +64,23 @@ public abstract class SeamUrlIntegrationDeployer<T> extends PathUrlIntegrationDe
    }
 
    /**
-    * Get JBoss home.
+    * Get server home.
     *
-    * @return the jboss home location
+    * @return the jboss server home location
     */
-   protected String getJBossHome()
+   protected String getServerHome()
    {
-      return "${jboss.home.url}/";
+      return "${jboss.server.home.url}/";
    }
 
    /**
-    * Get the integration path.
+    * Get the optinal lib path.
     *
     * @return the integration path
     */
-   protected String getIntegrationPath()
+   protected String getOptionalLib()
    {
-      return "integration/seam/";
+      return "lib-opt/";
    }
 
    /**
