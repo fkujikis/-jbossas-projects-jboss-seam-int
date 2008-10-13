@@ -39,7 +39,13 @@ public abstract class SeamUrlIntegrationDeployer<T> extends PathUrlIntegrationDe
    {
       super(input);
       setIntegrationURL(getURL());
-      setFiles(new String[]{"seam.properties", "META-INF/seam.properties", "META-INF/components.xml"});
+      setFiles(new String[]{
+                  "seam.properties",
+                  "META-INF/seam.properties",
+                  "WEB-INF/classes/seam.properties",
+                  "META-INF/components.xml",
+                  "WEB-INF/classes/META-INF/components.xml"}
+      );
    }
 
    /**
