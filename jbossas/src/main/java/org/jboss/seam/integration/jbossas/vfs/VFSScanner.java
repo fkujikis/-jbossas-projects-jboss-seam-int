@@ -18,10 +18,13 @@ import org.jboss.virtual.VirtualFile;
  * JBoss VSF aware scanner.
  *
  * @author <a href="mailto:ales.justin@jboss.com">Ales Justin</a>
+ * @author Pete Muir
  */
 public class VFSScanner extends AbstractScanner
 {
    private static final LogProvider log = Logging.getLogProvider(VFSScanner.class);
+   
+   private long timestamp;
 
    public VFSScanner(DeploymentStrategy deploymentStrategy)
    {
@@ -146,6 +149,7 @@ public class VFSScanner extends AbstractScanner
    {
       if (root.isLeaf())
       {
+    	 touchTimestamp(root);
          getDeploymentStrategy().handle(root.getPathName());
       }
       else
@@ -162,9 +166,24 @@ public class VFSScanner extends AbstractScanner
                int length = rootPathNameLength;
                if (name.charAt(length) == '/')
                   length++;
+               touchTimestamp(child);
                getDeploymentStrategy().handle(name.substring(length));
             }
          }
       }
+   }
+   
+   private void touchTimestamp(VirtualFile file) throws IOException
+   {
+      if (file.getLastModified() > timestamp)
+      {
+         timestamp = file.getLastModified();
+      }
+   }
+   
+   @Override
+   public long getTimestamp() 
+   {
+      return timestamp;
    }
 }
