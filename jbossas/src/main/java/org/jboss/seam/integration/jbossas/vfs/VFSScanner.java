@@ -181,9 +181,10 @@ public class VFSScanner extends AbstractScanner
     */
    private void touchTimestamp(VirtualFile file) throws IOException
    {
-      if (file.getLastModified() > timestamp)
+      long lastModified = file.getLastModified();
+      if (lastModified > timestamp)
       {
-         timestamp = file.getLastModified();
+         timestamp = lastModified;
       }
    }
    
