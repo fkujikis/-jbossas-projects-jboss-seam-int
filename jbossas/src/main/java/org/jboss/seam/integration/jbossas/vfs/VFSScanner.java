@@ -23,7 +23,7 @@ import org.jboss.virtual.VirtualFile;
 public class VFSScanner extends AbstractScanner
 {
    private static final LogProvider log = Logging.getLogProvider(VFSScanner.class);
-   
+
    private long timestamp;
 
    public VFSScanner(DeploymentStrategy deploymentStrategy)
@@ -149,7 +149,7 @@ public class VFSScanner extends AbstractScanner
    {
       if (root.isLeaf())
       {
-    	 touchTimestamp(root);
+    	   touchTimestamp(root);
          getDeploymentStrategy().handle(root.getPathName());
       }
       else
@@ -172,7 +172,13 @@ public class VFSScanner extends AbstractScanner
          }
       }
    }
-   
+
+   /**
+    * Update timestamp.
+    *
+    * @param file the file to check
+    * @throws IOException for any error
+    */
    private void touchTimestamp(VirtualFile file) throws IOException
    {
       if (file.getLastModified() > timestamp)
