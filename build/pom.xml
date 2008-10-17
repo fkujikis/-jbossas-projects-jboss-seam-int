@@ -7,7 +7,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.jboss.seam.integration</groupId>
   <artifactId>jboss-seam-int-dist</artifactId>
-  <version>5.0.0-SNAPSHOT</version>
+  <version>5.0.0.CR4</version>
   <packaging>pom</packaging>
   <name>JBoss Seam Int Build</name>
   <description>JBoss Seam Int Build</description>
