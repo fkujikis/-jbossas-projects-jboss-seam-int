@@ -150,7 +150,7 @@ public class VFSScanner extends AbstractScanner
       if (root.isLeaf())
       {
     	   touchTimestamp(root);
-         getDeploymentStrategy().handle(root.getPathName());
+           handleItem(root.getPathName());
       }
       else
       {
@@ -167,7 +167,7 @@ public class VFSScanner extends AbstractScanner
                if (name.charAt(length) == '/')
                   length++;
                touchTimestamp(child);
-               getDeploymentStrategy().handle(name.substring(length));
+               handleItem(name.substring(length));
             }
          }
       }
