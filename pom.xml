@@ -27,7 +27,7 @@
   </modules>
   
   <properties>
-    <version.jboss.seam>2.1.0.CR1</version.jboss.seam>
+    <version.jboss.seam>2.1.1-SNAPSHOT</version.jboss.seam>
     <version.jboss.vfs>2.0.0.CR1</version.jboss.vfs>
     <version.jboss.man>2.0.0.CR1</version.jboss.man>
     <version.jboss.microcontainer>2.0.0.CR2</version.jboss.microcontainer>
