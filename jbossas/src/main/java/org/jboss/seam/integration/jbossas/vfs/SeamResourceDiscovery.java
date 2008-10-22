@@ -55,6 +55,7 @@ public class SeamResourceDiscovery implements Scanner
             Set<Class<? extends Annotation>> annotations = classDeploymentHandler.getMetadata().getClassAnnotatedWith();
             Set<Class<?>> discoveredClasses = new HashSet<Class<?>>();
             // TODO retrieve discovered classes from MC AnnotationEnvironment
+            // TODO Write a ClassDescriptorSet decorator to adapt between MC representation and Seam representation to avoid this for loop
             for (Class<?> clazz : discoveredClasses)
             {
                String classFileName = classFilenameFromClassName(clazz.getName());
