@@ -2,27 +2,18 @@ package org.jboss.seam.integration.jbossas.vfs;
 
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.net.URL;
-import java.util.Enumeration;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
-import org.jboss.seam.deployment.AbstractScanner;
 import org.jboss.seam.deployment.ClassDeploymentHandler;
-import org.jboss.seam.deployment.ClassDeploymentMetadata;
 import org.jboss.seam.deployment.ClassDescriptor;
 import org.jboss.seam.deployment.DeploymentHandler;
 import org.jboss.seam.deployment.DeploymentStrategy;
 import org.jboss.seam.deployment.FileDescriptor;
 import org.jboss.seam.deployment.Scanner;
-import org.jboss.seam.log.LogProvider;
-import org.jboss.seam.log.Logging;
-import org.jboss.virtual.VFS;
-import org.jboss.virtual.VirtualFile;
 
 /**
  * Seam Resource Discovery for JBoss MC
@@ -34,12 +25,13 @@ import org.jboss.virtual.VirtualFile;
  */
 public class SeamResourceDiscovery implements Scanner
 {
-
    private DeploymentStrategy deploymentStrategy;
 	
    public SeamResourceDiscovery(DeploymentStrategy deploymentStrategy) 
    {
-	   this.deploymentStrategy = deploymentStrategy;
+      if (deploymentStrategy == null)
+         throw new IllegalArgumentException("Null deployment strategy.");
+      this.deploymentStrategy = deploymentStrategy;
    }
 
    public void scanDirectories(File[] directories)
