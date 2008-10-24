@@ -183,7 +183,7 @@ public class VFSScanner extends AbstractScanner
       }
       catch (Throwable t)
       {
-         log.warn("Error handling item: " + name, t);
+         log.warn("Error handling item '" + name + "': " + t);
       }
    }
 
