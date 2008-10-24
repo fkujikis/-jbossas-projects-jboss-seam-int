@@ -34,7 +34,7 @@ public class VFSScanner extends AbstractScanner
    /**
     * Get the virtual file root.
     *
-    * @param url the root URL
+    * @param url         the root URL
     * @param parentDepth level of parent depth
     * @return actual virtual file from url param
     * @throws IOException for any error
@@ -53,7 +53,7 @@ public class VFSScanner extends AbstractScanner
       URL vfsurl = null;
       String relative;
       File fp = new File(file);
-      
+
       log.trace("File: " + fp);
 
       if (fp.exists())
@@ -83,7 +83,7 @@ public class VFSScanner extends AbstractScanner
 
       VirtualFile top = VFS.getRoot(vfsurl);
       top = top.getChild(relative);
-      while(parentDepth > 0)
+      while (parentDepth > 0)
       {
          if (top == null)
             throw new IllegalArgumentException("Null parent: " + vfsurl + ", relative: " + relative);
@@ -149,27 +149,41 @@ public class VFSScanner extends AbstractScanner
    {
       if (root.isLeaf())
       {
-    	   touchTimestamp(root);
-           handleItem(root.getPathName());
+         touchTimestamp(root);
+         handleItemIgnoreErrors(root.getPathName());
       }
       else
       {
          String rootPathName = root.getPathName();
          int rootPathNameLength = rootPathName.length();
-         List<VirtualFile> children = root.getChildrenRecursively();
+         List<VirtualFile> children = root.getChildrenRecursively(LeafVirtualFileFilter.INSTANCE);
          for (VirtualFile child : children)
          {
-            if (child.isLeaf())
-            {
-               String name = child.getPathName();
-               // move past '/'
-               int length = rootPathNameLength;
-               if (name.charAt(length) == '/')
-                  length++;
-               touchTimestamp(child);
-               handleItem(name.substring(length));
-            }
+            String name = child.getPathName();
+            // move past '/'
+            int length = rootPathNameLength;
+            if (name.charAt(length) == '/')
+               length++;
+            touchTimestamp(child);
+            handleItemIgnoreErrors(name.substring(length));
          }
+      }
+   }
+
+   /**
+    * Handle item, ignore any errors.
+    *
+    * @param name the item name
+    */
+   protected void handleItemIgnoreErrors(String name)
+   {
+      try
+      {
+         handleItem(name);
+      }
+      catch (Throwable t)
+      {
+         log.warn("Error handling item: " + name, t);
       }
    }
 
@@ -187,9 +201,9 @@ public class VFSScanner extends AbstractScanner
          timestamp = lastModified;
       }
    }
-   
+
    @Override
-   public long getTimestamp() 
+   public long getTimestamp()
    {
       return timestamp;
    }
