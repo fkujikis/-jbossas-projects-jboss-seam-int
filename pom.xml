@@ -30,9 +30,9 @@
     <version.jboss.seam>2.1.1-SNAPSHOT</version.jboss.seam>
     <version.jboss.vfs>2.0.0.CR1</version.jboss.vfs>
     <version.jboss.man>2.0.0.CR2</version.jboss.man>
-    <version.jboss.microcontainer>2.0.0.CR2</version.jboss.microcontainer>
-    <version.jboss.cl>2.0.0.CR3</version.jboss.cl>
-    <version.jboss.deployers>2.0.0.CR2</version.jboss.deployers>
+    <version.jboss.microcontainer>2.0.0.CR3</version.jboss.microcontainer>
+    <version.jboss.cl>2.0.0.CR4</version.jboss.cl>
+    <version.jboss.deployers>2.0.0.CR3</version.jboss.deployers>
     <version.jboss.common.core>2.2.8.GA</version.jboss.common.core>
     <version.jboss.logging.spi>2.0.5.GA</version.jboss.logging.spi>
     <version.jboss.classloading.spi>5.0.0.CR2</version.jboss.classloading.spi>
