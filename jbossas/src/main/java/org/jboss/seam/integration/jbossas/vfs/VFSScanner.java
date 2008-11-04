@@ -22,7 +22,7 @@ import org.jboss.virtual.VirtualFile;
  */
 public class VFSScanner extends AbstractScanner
 {
-   private static final LogProvider log = Logging.getLogProvider(VFSScanner.class);
+   protected final LogProvider log = Logging.getLogProvider(getClass());
 
    private long timestamp;
 
@@ -39,7 +39,7 @@ public class VFSScanner extends AbstractScanner
     * @return actual virtual file from url param
     * @throws IOException for any error
     */
-   protected static VirtualFile getRoot(URL url, int parentDepth) throws IOException
+   protected VirtualFile getRoot(URL url, int parentDepth) throws IOException
    {
       log.trace("Root url: " + url);
 
@@ -81,7 +81,8 @@ public class VFSScanner extends AbstractScanner
 
       log.trace("URL: " + vfsurl + ", relative: " + relative);
 
-      VirtualFile top = VFS.getRoot(vfsurl);
+      // use cache any way - we should be OK with getting the parent later on
+      VirtualFile top = VFS.getCachedFile(vfsurl);
       top = top.getChild(relative);
       while (parentDepth > 0)
       {
