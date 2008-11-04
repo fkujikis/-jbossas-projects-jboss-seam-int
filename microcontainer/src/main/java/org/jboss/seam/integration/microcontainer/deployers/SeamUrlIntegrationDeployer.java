@@ -76,7 +76,7 @@ public abstract class SeamUrlIntegrationDeployer<T> extends PathUrlIntegrationDe
     */
    protected String getServerHome()
    {
-      return "${jboss.server.home.url}/";
+      return "${jboss.server.home.url}";
    }
 
    /**
