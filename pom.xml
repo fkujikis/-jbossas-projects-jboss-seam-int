@@ -30,7 +30,7 @@
     <version.jboss.seam>2.1.1-SNAPSHOT</version.jboss.seam>
     <version.jboss.vfs>2.0.0.CR2</version.jboss.vfs>
     <version.jboss.man>2.0.0.CR2</version.jboss.man>
-    <version.jboss.microcontainer>2.0.0.CR4</version.jboss.microcontainer>
+    <version.jboss.microcontainer>2.0.0.CR5</version.jboss.microcontainer>
     <version.jboss.cl>2.0.0.CR5</version.jboss.cl>
     <version.jboss.deployers>2.0.0.CR4</version.jboss.deployers>
     <version.jboss.common.core>2.2.9.GA</version.jboss.common.core>
