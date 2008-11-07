@@ -25,13 +25,12 @@ import javax.servlet.ServletContext;
 
 /**
  * Abstract VDF connector.
- * It knows how to access vdf utils from ServletContext.
  *
  * @param <U> exact vdf utility type
  * @param <T> exact attribute type
  * @author <a href="mailto:ales.justin@jboss.com">Ales Justin</a>
  */
-public abstract class AbstractVDFConnector<U, T>
+public abstract class AbstractVDFConnector<U, T> implements VDFConnector<U>
 {
    private ServletContext servletContext;
    private U utility;
@@ -57,24 +56,11 @@ public abstract class AbstractVDFConnector<U, T>
     */
    protected abstract String getAttributeKey();
 
-   /**
-    * Is VDF connector valid.
-    * 
-    * Normally this means that servlet context's attribute is present
-    * or some utility from attibute can be derived.
-    *
-    * @return true is connector exists, false otherwise
-    */
    public boolean isValid()
    {
       return getUtility() != null;
    }
 
-   /**
-    * Get the underlying vdf utility.
-    *
-    * @return the utility
-    */
    public U getUtility()
    {
       if (utility == null)
