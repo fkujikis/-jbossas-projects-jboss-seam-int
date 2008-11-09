@@ -50,6 +50,7 @@ public class VFSScanner extends AbstractScanner
       if (urlString.startsWith("vfs") == false)
          return null;
 
+      // try cache first, it should also have proper depth
       VFSCache cache = VFSCacheFactory.getInstance();
       VirtualFile vf = cache.getFile(url);
       int depth = parentDepth;
@@ -94,6 +95,7 @@ public class VFSScanner extends AbstractScanner
 
       log.trace("URL: " + vfsurl + ", relative: " + relative);
 
+      // no sense in checking cache, we already did that
       VirtualFile top = VFS.getRoot(vfsurl);
       top = top.getChild(relative);
       while (parentDepth > 0)
