@@ -13,6 +13,8 @@ import org.jboss.seam.log.LogProvider;
 import org.jboss.seam.log.Logging;
 import org.jboss.virtual.VFS;
 import org.jboss.virtual.VirtualFile;
+import org.jboss.virtual.spi.cache.VFSCache;
+import org.jboss.virtual.spi.cache.VFSCacheFactory;
 
 /**
  * JBoss VSF aware scanner.
@@ -48,6 +50,17 @@ public class VFSScanner extends AbstractScanner
       if (urlString.startsWith("vfs") == false)
          return null;
 
+      VFSCache cache = VFSCacheFactory.getInstance();
+      VirtualFile vf = cache.getFile(url);
+      int depth = parentDepth;
+      while (vf != null && depth > 0)
+      {
+         vf = vf.getParent();
+         depth--;
+      }
+      if (vf != null)
+         return vf;
+
       int p = urlString.indexOf(":");
       String file = urlString.substring(p + 1);
       URL vfsurl = null;
@@ -81,8 +94,7 @@ public class VFSScanner extends AbstractScanner
 
       log.trace("URL: " + vfsurl + ", relative: " + relative);
 
-      // use cache any way - we should be OK with getting the parent later on
-      VirtualFile top = VFS.getCachedFile(vfsurl);
+      VirtualFile top = VFS.getRoot(vfsurl);
       top = top.getChild(relative);
       while (parentDepth > 0)
       {
