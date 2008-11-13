@@ -36,11 +36,6 @@ public class CachingVFSScanner extends VFSScanner
    {
       log.trace("Root url: " + url);
 
-      String urlString = url.toString();
-      // TODO - this should go away once we figure out why -exp.war is part of CL resources
-      if (urlString.startsWith("vfs") == false)
-         return null;
-
       // get the cached file directly, as we expect it to already be there
       VirtualFile top = VFS.getCachedFile(url);
       while (parentDepth > 0)

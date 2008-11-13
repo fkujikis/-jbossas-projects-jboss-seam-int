@@ -45,11 +45,6 @@ public class VFSScanner extends AbstractScanner
    {
       log.trace("Root url: " + url);
 
-      String urlString = url.toString();
-      // TODO - this should go away once we figure out why -exp.war is part of CL resources
-      if (urlString.startsWith("vfs") == false)
-         return null;
-
       // try cache first, it should also have proper depth
       VFSCache cache = VFSCacheFactory.getInstance();
       VirtualFile vf = cache.getFile(url);
@@ -62,6 +57,7 @@ public class VFSScanner extends AbstractScanner
       if (vf != null)
          return vf;
 
+      String urlString = url.toExternalForm();
       int p = urlString.indexOf(":");
       String file = urlString.substring(p + 1);
       URL vfsurl = null;
