@@ -9,7 +9,7 @@ import org.jboss.virtual.VFS;
 import org.jboss.virtual.VirtualFile;
 
 /**
- * Caching JBoss VSF aware scanner.
+ * Caching JBoss VFS aware scanner.
  *
  * Use this one when you know VFSContext will be present in cache.
  * This is mostly true for apps that are deployed into jbossas deploy directory.
@@ -35,11 +35,6 @@ public class CachingVFSScanner extends VFSScanner
    protected VirtualFile getRoot(URL url, int parentDepth) throws IOException
    {
       log.trace("Root url: " + url);
-
-      String urlString = url.toString();
-      // TODO - this should go away once we figure out why -exp.war is part of CL resources
-      if (urlString.startsWith("vfs") == false)
-         return null;
 
       // get the cached file directly, as we expect it to already be there
       VirtualFile top = VFS.getCachedFile(url);

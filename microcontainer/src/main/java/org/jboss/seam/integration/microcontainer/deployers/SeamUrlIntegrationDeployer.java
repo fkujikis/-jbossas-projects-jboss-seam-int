@@ -86,7 +86,7 @@ public abstract class SeamUrlIntegrationDeployer<T> extends PathUrlIntegrationDe
     */
    protected String getOptionalLib()
    {
-      return "lib-opt/";
+      return "deployers/seam.deployer/lib-int/";
    }
 
    /**
