@@ -17,7 +17,7 @@ import org.jboss.virtual.spi.cache.VFSCache;
 import org.jboss.virtual.spi.cache.VFSCacheFactory;
 
 /**
- * JBoss VSF aware scanner.
+ * JBoss VFS aware scanner.
  *
  * @author <a href="mailto:ales.justin@jboss.com">Ales Justin</a>
  * @author Pete Muir

@@ -9,7 +9,7 @@ import org.jboss.virtual.VFS;
 import org.jboss.virtual.VirtualFile;
 
 /**
- * Caching JBoss VSF aware scanner.
+ * Caching JBoss VFS aware scanner.
  *
  * Use this one when you know VFSContext will be present in cache.
  * This is mostly true for apps that are deployed into jbossas deploy directory.
