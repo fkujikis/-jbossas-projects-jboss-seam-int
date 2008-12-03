@@ -109,8 +109,22 @@ public class VFSScanner extends AbstractScanner
 
    public void scanDirectories(File[] directories)
    {
+      scanDirectories(directories, new File[0]);
+   }
+   
+   public void scanDirectories(File[] directories, File[] excludedDirectories)
+   {
       for (File dir : directories)
       {
+         for (File excludedDirectory : excludedDirectories)
+         {
+            if (dir.equals(excludedDirectory))
+            {
+               log.trace("skipping excluded directory: " + dir);
+               continue;
+            }
+         }
+         
          try
          {
             VirtualFile root = getRoot(dir.toURL(), 0);
