@@ -73,8 +73,13 @@ public class SeamResourceDiscovery implements Scanner
    {
       
    }
-   
-   public long getTimestamp() 
+
+   public void scanDirectories(File[] directories, File[] excludedDirectories)
+   {
+      // TODO
+   }
+
+   public long getTimestamp()
    {
 	  // TODO Return the time when the last resource that Seam is interested in was modified (any resource visited by the above methods)
       return Long.MAX_VALUE;

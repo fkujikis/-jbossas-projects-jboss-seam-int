@@ -34,6 +34,8 @@ import org.jboss.deployers.structure.spi.DeploymentUnit;
  */
 public abstract class BaseAttachmentVDFConnector<U> extends AttachmentVDFConnector<U>
 {
+   private boolean allowHierarchyLookup;
+
    protected BaseAttachmentVDFConnector(ServletContext servletContext)
    {
       super(servletContext);
@@ -48,6 +50,37 @@ public abstract class BaseAttachmentVDFConnector<U> extends AttachmentVDFConnect
 
    protected U getUtilityFromAttribute(DeploymentUnit unit)
    {
+      U utility = lookup(unit);
+      if (utility == null && allowHierarchyLookup)
+      {
+         DeploymentUnit parent = unit.getParent();
+         while(parent != null && utility == null)
+         {
+            utility = lookup(parent);
+            parent = parent.getParent();
+         }
+      }
+      return utility;
+   }
+
+   /**
+    * Do attachment lookup.
+    *
+    * @param unit the deployment unit
+    * @return the lookup result
+    */
+   protected U lookup(DeploymentUnit unit)
+   {
       return unit.getAttachment(getAttachmentType());
+   }
+
+   /**
+    * Do we allow to do hierarchy attachment lookup on deployment unit.
+    *
+    * @param allowHierarchyLookup the allow hierarchy lookup flag
+    */
+   public void setAllowHierarchyLookup(boolean allowHierarchyLookup)
+   {
+      this.allowHierarchyLookup = allowHierarchyLookup;
    }
 }
