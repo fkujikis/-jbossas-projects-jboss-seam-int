@@ -45,7 +45,7 @@ public abstract class NamedAttachmentVDFConnector<U> extends BaseAttachmentVDFCo
     */
    protected abstract String getAttchmentName();
 
-   protected U getUtilityFromAttribute(DeploymentUnit unit)
+   protected U lookup(DeploymentUnit unit)
    {
       return unit.getAttachment(getAttchmentName(), getAttachmentType());
    }
