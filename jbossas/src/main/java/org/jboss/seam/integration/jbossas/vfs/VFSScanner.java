@@ -92,7 +92,7 @@ public class VFSScanner extends AbstractScanner
       log.trace("URL: " + vfsurl + ", relative: " + relative);
 
       // no sense in checking cache, we already did that
-      VirtualFile top = VFS.getRoot(vfsurl);
+      VirtualFile top = VFS.createNewRoot(vfsurl);
       top = top.getChild(relative);
       while (parentDepth > 0)
       {

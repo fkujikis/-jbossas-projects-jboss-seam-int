@@ -37,7 +37,7 @@ public class CachingVFSScanner extends VFSScanner
       log.trace("Root url: " + url);
 
       // get the cached file directly, as we expect it to already be there
-      VirtualFile top = VFS.getCachedFile(url);
+      VirtualFile top = VFS.getRoot(url);
       while (parentDepth > 0)
       {
          if (top == null)
