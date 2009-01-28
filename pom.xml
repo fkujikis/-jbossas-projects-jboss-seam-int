@@ -190,10 +190,15 @@
     <dependencies>
     
       <dependency>
+        <groupId>org.jboss.seam.integration</groupId>
+        <artifactId>jboss-seam-int-microcontainer</artifactId>
+        <version>${project.version}</version>
+      </dependency>      
+      <dependency>
         <groupId>org.jboss.deployers</groupId>
         <artifactId>jboss-deployers-client</artifactId>
         <version>${version.jboss.deployers}</version>
-      </dependency>      
+      </dependency>
       <dependency>
         <groupId>org.jboss.deployers</groupId>
         <artifactId>jboss-deployers-client-spi</artifactId>

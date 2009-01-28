@@ -43,6 +43,16 @@ public abstract class AbstractVDFConnector<U, T> implements VDFConnector<U>
    }
 
    /**
+    * Get servlet context.
+    *
+    * @return the servlet context
+    */
+   protected ServletContext getServletContext()
+   {
+      return servletContext;
+   }
+
+   /**
     * Get utility type.
     *
     * @return the utility type

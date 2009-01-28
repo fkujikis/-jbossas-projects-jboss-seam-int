@@ -23,52 +23,28 @@ package org.jboss.seam.integration.jbossas.vdf;
 
 import javax.servlet.ServletContext;
 
-import org.jboss.beans.metadata.spi.factory.BeanFactory;
+import org.jboss.seam.integration.microcontainer.vdf.DeploymentUnitAware;
 
 /**
- * AbstractBeanFactoryTypeVDFConnector.
+ * AbstractBeanFactoryInitializerTypeVDFConnector.
  *
  * @param <T> exact bean type
  * @author <a href="mailto:ales.justin@jboss.com">Ales Justin</a>
  */
-public abstract class AbstractBeanFactoryVDFConnector<T> extends AbstractBeanVDFConnector<T, BeanFactory>
+public abstract class AbstractBeanFactoryInitializerVDFConnector<T extends DeploymentUnitAware> extends AbstractBeanFactoryVDFConnector<T>
 {
-   protected AbstractBeanFactoryVDFConnector(ServletContext servletContext)
+   protected AbstractBeanFactoryInitializerVDFConnector(ServletContext servletContext)
    {
       super(servletContext);
    }
 
-   protected Class<BeanFactory> getBeanType()
-   {
-      return BeanFactory.class;
-   }
-
    @Override
-   protected T unwrap(BeanFactory factory)
-   {
-      try
-      {
-         Object bean = factory.createBean();
-         Class<T> type = getUnwrappedType();
-         if (type.isInstance(bean) == false)
-            throw new IllegalArgumentException("Bean " + bean + " is not instance of " + type);
-
-         T result = type.cast(bean);
-         initialize(result);
-         return result;
-      }
-      catch (Throwable t)
-      {
-         throw new RuntimeException(t);
-      }
-   }
-
-   /**
-    * Initialize the bean.
-    *
-    * @param bean the bean to initalize
-    */
    protected void initialize(T bean)
    {
+      VFSDeploymentUnitVDFConnector connector = new VFSDeploymentUnitVDFConnector(getServletContext());
+      if (connector.isValid() == false)
+         throw new IllegalArgumentException("No deployment unit.");
+
+      bean.setDeploymentUnit(connector.getUtility());
    }
 }
