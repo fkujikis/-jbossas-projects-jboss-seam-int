@@ -21,16 +21,16 @@
  */
 package org.jboss.seam.integration.microcontainer.deployers;
 
-import org.jboss.deployers.vfs.plugins.structure.modify.TempTopModificationTypeMatcher;
+import org.jboss.deployers.vfs.plugins.structure.modify.ExplodeTopModificationTypeMatcher;
 
 /**
  * Enable temp modification for Seam apps.
  *
  * @author <a href="mailto:ales.justin@jboss.org">Ales Justin</a>
  */
-public class SeamModificationTypeMatcher extends TempTopModificationTypeMatcher
+public class SeamExplodeModificationTypeMatcher extends ExplodeTopModificationTypeMatcher
 {
-   public SeamModificationTypeMatcher()
+   public SeamExplodeModificationTypeMatcher()
    {
       super(SeamConstants.SEAM_FILES);
    }
