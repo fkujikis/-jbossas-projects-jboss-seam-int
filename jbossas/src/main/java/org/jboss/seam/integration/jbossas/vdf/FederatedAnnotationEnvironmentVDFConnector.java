@@ -43,22 +43,28 @@ public class FederatedAnnotationEnvironmentVDFConnector extends AttachmentVDFCon
    protected List<AnnotationEnvironment> getUtilityFromAttribute(DeploymentUnit unit)
    {
       List<AnnotationEnvironment> list = new ArrayList<AnnotationEnvironment>();
-      DeploymentUnit parent = unit.getParent();
-      if (parent != null)
+      DeploymentUnit top = unit.getTopLevel();
+      findAllAnnotationEnvironments(top, list);
+      return list;
+   }
+
+   /**
+    * Find all anotation environments recursively.
+    *
+    * @param unit the current deployment unit
+    * @param list the holder list
+    */
+   protected void findAllAnnotationEnvironments(DeploymentUnit unit, List<AnnotationEnvironment> list)
+   {
+      applyAnnotationEnvironment(unit, list);
+      List<DeploymentUnit> children = unit.getChildren();
+      if (children != null && children.isEmpty() == false)
       {
-         applyAnnotationEnvironment(parent, list);
-         List<DeploymentUnit> children = parent.getChildren();
-         // cannot be null, since unit is its child
          for (DeploymentUnit child : children)
          {
-            applyAnnotationEnvironment(child, list);
+            findAllAnnotationEnvironments(child, list);
          }
       }
-      else
-      {
-         applyAnnotationEnvironment(unit, list);
-      }
-      return list;
    }
 
    /**

@@ -13,8 +13,7 @@ import org.jboss.seam.log.LogProvider;
 import org.jboss.seam.log.Logging;
 import org.jboss.virtual.VFS;
 import org.jboss.virtual.VirtualFile;
-import org.jboss.virtual.spi.cache.VFSCache;
-import org.jboss.virtual.spi.cache.VFSCacheFactory;
+import org.jboss.virtual.spi.registry.VFSRegistry;
 
 /**
  * JBoss VFS aware scanner.
@@ -46,8 +45,8 @@ public class VFSScanner extends AbstractScanner
       log.trace("Root url: " + url);
 
       // try cache first, it should also have proper depth
-      VFSCache cache = VFSCacheFactory.getInstance();
-      VirtualFile vf = cache.getFile(url);
+      VFSRegistry registry = VFSRegistry.getInstance();
+      VirtualFile vf = registry.getFile(url);
       int depth = parentDepth;
       while (vf != null && depth > 0)
       {

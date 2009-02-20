@@ -19,19 +19,21 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jboss.seam.integration.microcontainer.deployers;
+package org.jboss.seam.integration.microcontainer.vdf;
 
-import org.jboss.deployers.vfs.plugins.structure.modify.TempTopModificationTypeMatcher;
+import org.jboss.deployers.structure.spi.DeploymentUnit;
 
 /**
- * Enable temp modification for Seam apps.
+ * Deployment unit aware marker.
  *
  * @author <a href="mailto:ales.justin@jboss.org">Ales Justin</a>
  */
-public class SeamModificationTypeMatcher extends TempTopModificationTypeMatcher
+public interface DeploymentUnitAware
 {
-   public SeamModificationTypeMatcher()
-   {
-      super(SeamConstants.SEAM_FILES);
-   }
+   /**
+    * Set the deployment unit.
+    *
+    * @param unit the deployment unit
+    */
+   void setDeploymentUnit(DeploymentUnit unit);
 }
