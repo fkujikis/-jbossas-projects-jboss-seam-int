@@ -7,7 +7,7 @@
   </parent>
   <groupId>org.jboss.seam.integration</groupId>
   <artifactId>jboss-seam-int</artifactId>
-  <version>5.0.2-SNAPSHOT</version>
+  <version>5.0.2.GA</version>
   <packaging>pom</packaging>
   <name>JBoss Seam Int Aggregator</name>
   <url>http://www.jboss.org/jbossmc/</url>
@@ -15,9 +15,9 @@
     JBoss ClassLoader Parent POM
   </description>
   <scm>
-    <connection>scm:svn:http://anonsvn.jboss.org/repos/jbossas/projects/jboss-seam-int/branches/</connection>
-    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/jboss-seam-int/branches/</developerConnection>
-    <url>http://viewvc.jboss.org/cgi-bin/viewvc.cgi/jbossas/projects/jboss-seam-int/branches/</url>
+    <connection>scm:svn:http://anonsvn.jboss.org/repos/jbossas/projects/jboss-seam-int/tags/5.0.2.GA</connection>
+    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/jboss-seam-int/tags/5.0.2.GA</developerConnection>
+    <url>http://viewvc.jboss.org/cgi-bin/viewvc.cgi/jbossas/projects/jboss-seam-int/tags/5.0.2.GA</url>
   </scm>
 
   <modules>
@@ -189,6 +189,11 @@
     <!-- The parent pom manages the inter-dependencies of the modules. -->
     <dependencies>
     
+      <dependency>
+        <groupId>org.jboss.seam.integration</groupId>
+        <artifactId>jboss-seam-int-microcontainer</artifactId>
+        <version>${project.version}</version>
+      </dependency>      
       <dependency>
         <groupId>org.jboss.deployers</groupId>
         <artifactId>jboss-deployers-client</artifactId>
