@@ -127,7 +127,6 @@ public class VFSScanner extends AbstractScanner
     * @param path the current path
     * @param excludedDirectories the excluded dirs
     */
-   // TODO - @Pete, this code should be on AbstractScanner
    private void handleDirectory(File file, String path, File[] excludedDirectories)
    {
       for (File excludedDirectory : excludedDirectories)
