@@ -108,19 +108,52 @@ public class VFSScanner extends AbstractScanner
 
    public void scanDirectories(File[] directories)
    {
-      for (File dir : directories)
+      scanDirectories(directories, new File[0]);
+   }
+
+   @Override
+   public void scanDirectories(File[] directories, File[] excludedDirectories)
+   {
+      for (File directory : directories)
       {
-         try
+         handleDirectory(directory, null, excludedDirectories);
+      }
+   }
+
+   /**
+    * Handle directories.
+    *
+    * @param file the file to handle
+    * @param path the current path
+    * @param excludedDirectories the excluded dirs
+    */
+   // TODO - @Pete, this code should be on AbstractScanner
+   private void handleDirectory(File file, String path, File[] excludedDirectories)
+   {
+      for (File excludedDirectory : excludedDirectories)
+      {
+         if (file.equals(excludedDirectory))
          {
-            VirtualFile root = getRoot(dir.toURL(), 0);
-            if (root != null)
-               handleRoot(root);
-            else
-               log.trace("Null root: " + dir);
+            log.trace("Skipping excluded directory: " + file);
+            return;
          }
-         catch (IOException e)
+      }
+
+      log.trace("Handling directory: " + file);
+      for (File child: file.listFiles())
+      {
+         String newPath = path==null ? child.getName() : path + '/' + child.getName();
+         if (child.isDirectory())
          {
-            log.warn("Cannot scan directory " + dir, e);
+            handleDirectory(child, newPath, excludedDirectories);
+         }
+         else
+         {
+            if (handle(newPath))
+            {
+               // only try to update the timestamp on this scanner if the file was actually handled
+               touchTimestamp(child);
+            }
          }
       }
    }
@@ -205,7 +238,26 @@ public class VFSScanner extends AbstractScanner
     */
    private void touchTimestamp(VirtualFile file) throws IOException
    {
-      long lastModified = file.getLastModified();
+      touchTimestamp(file.getLastModified());
+   }
+
+   /**
+    * Update timestamp.
+    *
+    * @param file the file to check
+    */
+   private void touchTimestamp(File file)
+   {
+      touchTimestamp(file.lastModified());
+   }
+
+   /**
+    * Update timestamp.
+    *
+    * @param lastModified the timestamp to check
+    */
+   private void touchTimestamp(long lastModified)
+   {
       if (lastModified > timestamp)
       {
          timestamp = lastModified;
