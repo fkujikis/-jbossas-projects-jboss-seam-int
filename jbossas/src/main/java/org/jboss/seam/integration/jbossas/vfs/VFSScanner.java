@@ -149,11 +149,8 @@ public class VFSScanner extends AbstractScanner
          }
          else
          {
-            if (handle(newPath))
-            {
-               // only try to update the timestamp on this scanner if the file was actually handled
-               touchTimestamp(child);
-            }
+            touchTimestamp(child);
+            handleItemIgnoreErrors(newPath);
          }
       }
    }
