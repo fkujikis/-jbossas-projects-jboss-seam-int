@@ -3,6 +3,7 @@ package org.jboss.seam.integration.jbossas.vfs;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.List;
@@ -25,11 +26,25 @@ public class VFSScanner extends AbstractScanner
 {
    protected final LogProvider log = Logging.getLogProvider(getClass());
 
+   protected static Method handleMethod;
    private long timestamp;
 
    public VFSScanner(DeploymentStrategy deploymentStrategy)
    {
       super(deploymentStrategy);
+   }
+
+   static
+   {
+      try
+      {
+         handleMethod = AbstractScanner.class.getDeclaredMethod("handle", String.class);
+         handleMethod.setAccessible(true);
+      }
+      catch (Throwable t)
+      {
+         handleMethod = null;
+      }
    }
 
    /**
@@ -138,18 +153,27 @@ public class VFSScanner extends AbstractScanner
          }
       }
 
+      // one wrapper delegate per invocation
+      FileModifiableResource delegate = new FileModifiableResource();
+
       log.trace("Handling directory: " + file);
-      for (File child: file.listFiles())
+      for (File child : file.listFiles())
       {
-         String newPath = path==null ? child.getName() : path + '/' + child.getName();
+         String newPath = (path == null) ? child.getName() : path + '/' + child.getName();
          if (child.isDirectory())
          {
             handleDirectory(child, newPath, excludedDirectories);
          }
          else
          {
-            touchTimestamp(child);
-            handleItemIgnoreErrors(newPath);
+            delegate.setFile(child);
+            try
+            {
+               handleItem(delegate, newPath);
+            }
+            catch (IOException ignored)
+            {
+            }
          }
       }
    }
@@ -186,13 +210,18 @@ public class VFSScanner extends AbstractScanner
     */
    protected void handleRoot(VirtualFile root) throws IOException
    {
+      // one wrapper delegate per invocation
+      VirtualFileModifiableResource delegate = new VirtualFileModifiableResource();
+
       if (root.isLeaf())
       {
-         touchTimestamp(root);
+         delegate.setFile(root);
+         touchTimestamp(delegate);
          handleItemIgnoreErrors(root.getPathName());
       }
       else
       {
+         boolean isArchive = root.isArchive();
          String rootPathName = root.getPathName();
          int rootPathNameLength = rootPathName.length();
          List<VirtualFile> children = root.getChildrenRecursively(LeafVirtualFileFilter.INSTANCE);
@@ -203,9 +232,54 @@ public class VFSScanner extends AbstractScanner
             int length = rootPathNameLength;
             if (name.charAt(length) == '/')
                length++;
-            touchTimestamp(child);
-            handleItemIgnoreErrors(name.substring(length));
+
+            String path = name.substring(length);
+
+            if (isArchive)
+            {
+               // don't timestamp check zip entries, just handle them
+               handleItemIgnoreErrors(path);
+            }
+            else
+            {
+               // check if we need to touch
+               delegate.setFile(child);
+               handleItem(delegate, path);
+            }
          }
+      }
+   }
+
+   /**
+    * Handle item.
+    *
+    * @param resource the item's resource
+    * @param name the item name
+    * @throws IOException for any error
+    */
+   protected void handleItem(ModifiableResource resource, String name) throws IOException
+   {
+      boolean doTouch = true;
+      try
+      {
+         if (handleMethod != null)
+            doTouch = (Boolean)handleMethod.invoke(this, name);
+      }
+      catch (Exception e)
+      {
+         IOException ioe = new IOException();
+         ioe.initCause(e);
+         throw ioe;
+      }
+
+      if (doTouch)
+      {
+         touchTimestamp(resource);
+      }
+      // we haven't handled it before
+      if (handleMethod == null)
+      {
+         handleItemIgnoreErrors(name);
       }
    }
 
@@ -232,28 +306,9 @@ public class VFSScanner extends AbstractScanner
     * @param file the file to check
     * @throws IOException for any error
     */
-   private void touchTimestamp(VirtualFile file) throws IOException
+   private void touchTimestamp(ModifiableResource file) throws IOException
    {
-      touchTimestamp(file.getLastModified());
-   }
-
-   /**
-    * Update timestamp.
-    *
-    * @param file the file to check
-    */
-   private void touchTimestamp(File file)
-   {
-      touchTimestamp(file.lastModified());
-   }
-
-   /**
-    * Update timestamp.
-    *
-    * @param lastModified the timestamp to check
-    */
-   private void touchTimestamp(long lastModified)
-   {
+      long lastModified = file.getLastModified();
       if (lastModified > timestamp)
       {
          timestamp = lastModified;

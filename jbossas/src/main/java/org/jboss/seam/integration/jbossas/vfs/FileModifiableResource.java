@@ -19,21 +19,35 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jboss.seam.integration.microcontainer.vdf;
+package org.jboss.seam.integration.jbossas.vfs;
 
-import org.jboss.deployers.structure.spi.DeploymentUnit;
+import java.io.File;
+import java.io.IOException;
 
 /**
- * Deployment unit aware marker.
+ * File delegate to ModifieableResource.
  *
  * @author <a href="mailto:ales.justin@jboss.org">Ales Justin</a>
  */
-public interface DeploymentUnitAware
+public class FileModifiableResource implements ModifiableResource
 {
-   /**
-    * Set the deployment unit.
-    *
-    * @param unit the deployment unit
-    */
-   void setDeploymentUnit(DeploymentUnit unit);
+   private File file;
+
+   protected File getFile()
+   {
+      if (file == null)
+         throw new IllegalArgumentException("No file set.");
+
+      return file;
+   }
+
+   public void setFile(File file)
+   {
+      this.file = file;
+   }
+
+   public long getLastModified() throws IOException
+   {
+      return getFile().lastModified();
+   }
 }
