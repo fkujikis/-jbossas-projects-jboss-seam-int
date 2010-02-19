@@ -21,10 +21,8 @@
 */
 package org.jboss.seam.integration.jbossas.vfs;
 
-import java.io.IOException;
-
-import org.jboss.virtual.VirtualFileFilter;
-import org.jboss.virtual.VirtualFile;
+import org.jboss.vfs.VirtualFileFilter;
+import org.jboss.vfs.VirtualFile;
 
 /**
  * Only accept leaves.
@@ -41,13 +39,6 @@ public class LeafVirtualFileFilter implements VirtualFileFilter
 
    public boolean accepts(VirtualFile file)
    {
-      try
-      {
-         return file.isLeaf();
-      }
-      catch (IOException e)
-      {
-         return false;
-      }
+      return file.isFile();
    }
 }

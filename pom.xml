@@ -7,7 +7,7 @@
   </parent>
   <groupId>org.jboss.seam.integration</groupId>
   <artifactId>jboss-seam-int</artifactId>
-  <version>5.2.0-SNAPSHOT</version>
+  <version>6.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>JBoss Seam Int Aggregator</name>
   <url>http://www.jboss.org/jbossmc/</url>
@@ -28,15 +28,15 @@
   
   <properties>
     <version.jboss.seam>2.1.1.GA</version.jboss.seam>
-    <version.jboss.vfs>2.1.1.GA</version.jboss.vfs>
+    <version.jboss.vfs>3.0.0.CR1</version.jboss.vfs>
     <version.jboss.man>2.1.0.CR8</version.jboss.man>
     <version.jboss.microcontainer>2.0.5.GA</version.jboss.microcontainer>
-    <version.jboss.cl>2.0.5.GA</version.jboss.cl>
-    <version.jboss.deployers>2.0.6.GA</version.jboss.deployers>
-    <version.jboss.common.core>2.2.13.GA</version.jboss.common.core>
-    <version.jboss.logging.spi>2.0.5.GA</version.jboss.logging.spi>
+    <version.jboss.cl>2.2.0.Alpha3</version.jboss.cl>
+    <version.jboss.deployers>2.2.0.Alpha2</version.jboss.deployers>
+    <version.jboss.common.core>2.2.17.GA</version.jboss.common.core>
+    <version.jboss.logging.spi>2.2.0.CR1</version.jboss.logging.spi>
     <version.jboss.classloading.spi>5.0.3.GA</version.jboss.classloading.spi>
-    <version.jboss.metadata>1.0.0.CR18</version.jboss.metadata>
+    <version.jboss.metadata.war>2.0.0.Alpha13</version.jboss.metadata.war>
     <version.jbossxb>2.0.1.GA</version.jbossxb>
     <version.servlet.api>2.5</version.servlet.api>
     <version.org.jboss.test>1.1.1.GA</version.org.jboss.test>
@@ -309,8 +309,8 @@
       
       <dependency>
         <groupId>org.jboss.metadata</groupId>
-        <artifactId>jboss-metadata</artifactId>
-        <version>${version.jboss.metadata}</version>
+        <artifactId>jboss-metadata-war</artifactId>
+        <version>${version.jboss.metadata.war}</version>
       </dependency>
 
       <dependency>

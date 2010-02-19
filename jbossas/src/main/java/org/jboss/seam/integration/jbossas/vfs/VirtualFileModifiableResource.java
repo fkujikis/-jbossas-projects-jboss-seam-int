@@ -23,7 +23,7 @@ package org.jboss.seam.integration.jbossas.vfs;
 
 import java.io.IOException;
 
-import org.jboss.virtual.VirtualFile;
+import org.jboss.vfs.VirtualFile;
 
 /**
  * VirtualFile delegate to ModifieableResource.
