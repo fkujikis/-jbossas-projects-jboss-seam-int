@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.jboss</groupId>
     <artifactId>jboss-parent</artifactId>
-    <version>4</version>
+    <version>5</version>
   </parent>
   <groupId>org.jboss.seam.integration</groupId>
   <artifactId>jboss-seam-int</artifactId>
@@ -124,7 +124,7 @@
     </pluginManagement>
   </build>
   
-  <repositories>
+  <!-- repositories>
     <repository>
       <id>repository.jboss.org</id>
       <name>JBoss Repository</name>
@@ -146,7 +146,6 @@
         <enabled>false</enabled>
       </releases>
     </repository>
-    <!-- APIviz repository -->
     <repository>
       <id>apiviz.release</id>
       <name>APIviz releases</name>
@@ -159,7 +158,7 @@
         <enabled>false</enabled>
       </snapshots>
     </repository>
-  </repositories>
+  </repositories -->
   
   <reporting>
     <plugins>
