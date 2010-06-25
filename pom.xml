@@ -27,7 +27,7 @@
   </modules>
   
   <properties>
-    <version.jboss.seam>2.2.0.GA</version.jboss.seam>
+    <version.jboss.seam>2.2.1.CR1</version.jboss.seam>
     <version.jboss.vfs>2.2.0.GA</version.jboss.vfs>
     <version.jboss.man>2.1.1.SP2</version.jboss.man>
     <version.jboss.microcontainer>2.0.10.GA</version.jboss.microcontainer>
