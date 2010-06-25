@@ -15,9 +15,9 @@
     JBoss ClassLoader Parent POM
   </description>
   <scm>
-    <connection>scm:svn:http://anonsvn.jboss.org/repos/jbossas/projects/jboss-seam-int/branches/Branch_5_1/</connection>
-    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/jboss-seam-int/branches/Branch_5_1/</developerConnection>
-    <url>http://viewvc.jboss.org/cgi-bin/viewvc.cgi/jbossas/projects/jboss-seam-int/branches/Branch_5_1/</url>
+    <connection>scm:svn:http://anonsvn.jboss.org/repos/jbossas/projects/jboss-seam-int/tags/5.1.0.GA/</connection>
+    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/jboss-seam-int/tags/5.1.0.GA/</developerConnection>
+    <url>http://viewvc.jboss.org/cgi-bin/viewvc.cgi/jbossas/projects/jboss-seam-int/tags/5.1.0.GA/</url>
   </scm>
 
   <modules>
