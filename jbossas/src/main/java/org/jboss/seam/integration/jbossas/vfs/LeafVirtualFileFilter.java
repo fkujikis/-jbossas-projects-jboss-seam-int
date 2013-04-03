@@ -21,24 +21,21 @@
 */
 package org.jboss.seam.integration.jbossas.vfs;
 
-import org.jboss.vfs.VirtualFileFilter;
 import org.jboss.vfs.VirtualFile;
+import org.jboss.vfs.VirtualFileFilter;
 
 /**
  * Only accept leaves.
  *
  * @author <a href="mailto:ales.justin@jboss.com">Ales Justin</a>
  */
-public class LeafVirtualFileFilter implements VirtualFileFilter
-{
-   public static final VirtualFileFilter INSTANCE = new LeafVirtualFileFilter();
+public class LeafVirtualFileFilter implements VirtualFileFilter {
+    public static final VirtualFileFilter INSTANCE = new LeafVirtualFileFilter();
 
-   private LeafVirtualFileFilter()
-   {
-   }
+    private LeafVirtualFileFilter() {
+    }
 
-   public boolean accepts(VirtualFile file)
-   {
-      return file.isFile();
-   }
+    public boolean accepts(VirtualFile file) {
+        return file.isFile();
+    }
 }

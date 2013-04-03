@@ -26,29 +26,25 @@ import java.io.IOException;
 import org.jboss.vfs.VirtualFile;
 
 /**
- * VirtualFile delegate to ModifieableResource.
+ * VirtualFile delegate to ModifiableResource.
  *
  * @author <a href="mailto:ales.justin@jboss.org">Ales Justin</a>
  */
-public class VirtualFileModifiableResource implements ModifiableResource
-{
-   private VirtualFile file;
+public class VirtualFileModifiableResource implements ModifiableResource {
+    private VirtualFile file;
 
-   protected VirtualFile getFile()
-   {
-      if (file == null)
-         throw new IllegalArgumentException("No file set.");
+    protected VirtualFile getFile() {
+        if (file == null)
+            throw new IllegalArgumentException("No file set.");
 
-      return file;
-   }
+        return file;
+    }
 
-   public void setFile(VirtualFile file)
-   {
-      this.file = file;
-   }
+    public void setFile(VirtualFile file) {
+        this.file = file;
+    }
 
-   public long getLastModified() throws IOException
-   {
-      return getFile().getLastModified();
-   }
+    public long getLastModified() throws IOException {
+        return getFile().getLastModified();
+    }
 }

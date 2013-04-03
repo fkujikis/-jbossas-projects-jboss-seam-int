@@ -28,13 +28,12 @@ import java.io.IOException;
  *
  * @author <a href="mailto:ales.justin@jboss.org">Ales Justin</a>
  */
-public interface ModifiableResource
-{
-   /**
-    * Get last modified timestamp.
-    *
-    * @return the last modified timestamp
-    * @throws IOException for any error
-    */
-   long getLastModified() throws IOException;
+public interface ModifiableResource {
+    /**
+     * Get last modified timestamp.
+     *
+     * @return the last modified timestamp
+     * @throws IOException for any error
+     */
+    long getLastModified() throws IOException;
 }

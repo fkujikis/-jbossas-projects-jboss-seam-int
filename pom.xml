@@ -1,388 +1,164 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.jboss</groupId>
-    <artifactId>jboss-parent</artifactId>
-    <version>5</version>
-  </parent>
-  <groupId>org.jboss.seam.integration</groupId>
-  <artifactId>jboss-seam-int</artifactId>
-  <version>6.0.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>JBoss Seam Int Aggregator</name>
-  <url>http://www.jboss.org/jbossmc/</url>
-  <description>
-    JBoss ClassLoader Parent POM
-  </description>
-  <scm>
-    <connection>scm:svn:http://anonsvn.jboss.org/repos/jbossas/projects/jboss-seam-int/trunk/</connection>
-    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/jboss-seam-int/trunk/</developerConnection>
-    <url>http://viewvc.jboss.org/cgi-bin/viewvc.cgi/jbossas/projects/jboss-seam-int/trunk/</url>
-  </scm>
-
-  <modules>
-    <module>build</module>
-    <module>jbossas</module>
-    <module>microcontainer</module>
-  </modules>
-  
-  <properties>
-    <version.jboss.seam>2.2.1.CR3</version.jboss.seam>
-    <version.jboss.vfs>3.0.0.GA</version.jboss.vfs>
-    <version.jboss.man>2.1.1.SP1</version.jboss.man>
-    <version.jboss.microcontainer>2.2.0.GA</version.jboss.microcontainer>
-    <version.jboss.cl>2.2.0.GA</version.jboss.cl>
-    <version.jboss.deployers>2.2.0.GA</version.jboss.deployers>
-    <version.jboss.common.core>2.2.17.GA</version.jboss.common.core>
-    <version.jboss.logging.spi>2.2.0.CR1</version.jboss.logging.spi>
-    <version.jboss.classloading.spi>5.0.3.GA</version.jboss.classloading.spi>
-    <version.jboss.metadata.war>2.0.0.Alpha13</version.jboss.metadata.war>
-    <version.jbossxb>2.0.2.GA</version.jbossxb>
-    <version.servlet.api>2.5</version.servlet.api>
-    <version.org.jboss.test>1.1.5.GA</version.org.jboss.test>
-    <version.junit>4.4</version.junit>
-  </properties>
-
-  <build>
-    <outputDirectory>${microcontainer.outputDirectory}</outputDirectory>
-    <testOutputDirectory>${microcontainer.testOutputDirectory}</testOutputDirectory>
-    <finalName>${artifactId}</finalName>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
-          <showDeprecation>true</showDeprecation>
-          <showWarnings>true</showWarnings>
-          <optimize>true</optimize>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>2.0-beta-9</version>
-        <configuration>
-          <tagBase>https://svn.jboss.org/repos/jbossas/projects/jboss-seam-int/tags</tagBase>
-          <autoVersionSubmodules>true</autoVersionSubmodules>
-        </configuration>
-      </plugin>
-    </plugins>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-assembly-plugin</artifactId>
-          <executions>
-            <execution>
-              <id>make-assembly</id>
-              <phase>package</phase>
-              <goals>
-                <goal>attached</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-        <plugin>
-          <artifactId>maven-idea-plugin</artifactId>
-          <configuration>
-            <downloadSources>true</downloadSources>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>2.2</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.4.3</version>
-          <configuration>
-            <redirectTestOutputToFile>true</redirectTestOutputToFile>
-            <includes>
-              <include>org/jboss/test/**/*TestCase.java</include>
-            </includes>
-          </configuration>
-        </plugin>
-        <plugin>
-          <!-- Configure javadoc plugin with APIviz -->
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-javadoc-plugin</artifactId>
-          <configuration>
-            <doclet>net.gleamynode.apiviz.APIviz</doclet>
-            <docletArtifact>
-              <groupId>net.gleamynode.apiviz</groupId>
-              <artifactId>apiviz</artifactId>
-              <version>1.1.0</version>
-            </docletArtifact>
-            <encoding>UTF-8</encoding>
-          </configuration>
-        </plugin>        
-      </plugins>
-    </pluginManagement>
-  </build>
-  
-  <repositories>
-    <repository>
-      <id>repository.jboss.org</id>
-      <name>JBoss Repository</name>
-      <layout>default</layout>
-      <url>http://repository.jboss.org/maven2/</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>snapshots.jboss.org</id>
-      <name>JBoss Snapshots Repository</name>
-      <layout>default</layout>
-      <url>http://snapshots.jboss.org/maven2/</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-    </repository>
-    <!-- APIviz repository -->
-    <repository>
-      <id>apiviz.release</id>
-      <name>APIviz releases</name>
-      <url>http://apiviz.googlecode.com/svn/site/repo/mvn/release</url>
-      <releases>
-        
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
-  
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>dependencies</report>
-              <report>issue-tracking</report>
-              <report>license</report>
-              <report>scm</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>findbugs-maven-plugin</artifactId>
-        <version>1.0.0</version>
-      </plugin>
-    </plugins>
-  </reporting>
-  
-  <dependencyManagement>
-    <!-- The parent pom manages the inter-dependencies of the modules. -->
-    <dependencies>
-    
-      <dependency>
-        <groupId>org.jboss.seam.integration</groupId>
-        <artifactId>jboss-seam-int-microcontainer</artifactId>
-        <version>${project.version}</version>
-      </dependency>      
-      <dependency>
-        <groupId>org.jboss.deployers</groupId>
-        <artifactId>jboss-deployers-client</artifactId>
-        <version>${version.jboss.deployers}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.jboss.deployers</groupId>
-        <artifactId>jboss-deployers-client-spi</artifactId>
-        <version>${version.jboss.deployers}</version>
-      </dependency>      
-      <dependency>
-        <groupId>org.jboss.deployers</groupId>
-        <artifactId>jboss-deployers-core-spi</artifactId>
-        <version>${version.jboss.deployers}</version>
-      </dependency>      
-      <dependency>
-        <groupId>org.jboss.deployers</groupId>
-        <artifactId>jboss-deployers-impl</artifactId>
-        <version>${version.jboss.deployers}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.jboss</groupId>
-            <artifactId>javassist</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>      
-      <dependency>
-        <groupId>org.jboss.deployers</groupId>
-        <artifactId>jboss-deployers-spi</artifactId>
-        <version>${version.jboss.deployers}</version>
-      </dependency>      
-      <dependency>
-        <groupId>org.jboss.deployers</groupId>
-        <artifactId>jboss-deployers-structure-spi</artifactId>
-        <version>${version.jboss.deployers}</version>
-      </dependency>      
-      <dependency>
-        <groupId>org.jboss.deployers</groupId>
-        <artifactId>jboss-deployers-vfs</artifactId>
-        <version>${version.jboss.deployers}</version>
-      </dependency>      
-      <dependency>
-        <groupId>org.jboss.deployers</groupId>
-        <artifactId>jboss-deployers-vfs-spi</artifactId>
-        <version>${version.jboss.deployers}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.jboss.cl</groupId>
-        <artifactId>jboss-classloader</artifactId>
-        <version>${version.jboss.cl}</version>
-      </dependency>
-      
-      <dependency>
-        <groupId>org.jboss.cl</groupId>
-        <artifactId>jboss-classloading</artifactId>
-        <version>${version.jboss.cl}</version>
-      </dependency>
-      
-      <dependency>
-        <groupId>org.jboss.cl</groupId>
-        <artifactId>jboss-classloading-vfs</artifactId>
-        <version>${version.jboss.cl}</version>
-      </dependency>
-      
-      <dependency>
-        <groupId>org.jboss.man</groupId>
-        <artifactId>jboss-managed</artifactId>
-        <version>${version.jboss.man}</version>
-      </dependency>
-      
-      <dependency>
-        <groupId>org.jboss.kernel</groupId>
-        <artifactId>jboss-dependency</artifactId>
-        <version>${version.jboss.microcontainer}</version>
-      </dependency>
-      
-      <dependency>
-        <groupId>org.jboss.kernel</groupId>
-        <artifactId>jboss-kernel</artifactId>
-        <version>${version.jboss.microcontainer}</version>
-      </dependency>
-      
-      <dependency>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
         <groupId>org.jboss</groupId>
-        <artifactId>jboss-common-core</artifactId>
-        <version>${version.jboss.common.core}</version>
-      </dependency>
-      
-      <dependency>
-        <groupId>org.jboss.logging</groupId>
-        <artifactId>jboss-logging-spi</artifactId>
-        <version>${version.jboss.logging.spi}</version>
-      </dependency>
+        <artifactId>jboss-parent</artifactId>
+        <version>10</version>
+    </parent>
+    <groupId>org.jboss.seam.integration</groupId>
+    <artifactId>jboss-seam-int</artifactId>
+    <version>7.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>JBoss Seam Int Aggregator</name>
+    <url>http://www.jboss.org/jbossmc/</url>
+    <description>
+        JBoss ClassLoader Parent POM
+    </description>
+    <scm>
+        <connection>scm:svn:http://anonsvn.jboss.org/repos/jbossas/projects/jboss-seam-int/trunk/</connection>
+        <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/jboss-seam-int/trunk/
+        </developerConnection>
+        <url>http://viewvc.jboss.org/cgi-bin/viewvc.cgi/jbossas/projects/jboss-seam-int/trunk/</url>
+    </scm>
 
-      <dependency>
-        <groupId>org.jboss.integration</groupId>
-        <artifactId>jboss-classloading-spi</artifactId>
-        <version>${version.jboss.classloading.spi}</version>
-      </dependency>
-      
-      <dependency>
-        <groupId>org.jboss</groupId>
-        <artifactId>jbossxb</artifactId>
-        <version>${version.jbossxb}</version>
-      </dependency>
-      
-      <dependency>
-        <groupId>org.jboss</groupId>
-        <artifactId>jboss-vfs</artifactId>
-        <version>${version.jboss.vfs}</version>
-      </dependency>
-      
-      <dependency>
-        <groupId>org.jboss.metadata</groupId>
-        <artifactId>jboss-metadata-war</artifactId>
-        <version>${version.jboss.metadata.war}</version>
-      </dependency>
+    <modules>
+        <module>jbossas</module>
+    </modules>
 
-      <dependency>
-        <groupId>org.jboss.seam</groupId>
-        <artifactId>jboss-seam</artifactId>
-        <version>${version.jboss.seam}</version>
-      </dependency>
+    <properties>
+        <version.jboss.seam>2.3.0.Final</version.jboss.seam>
+        <version.jboss.vfs>3.1.0.Final</version.jboss.vfs>
+        <version.servlet.api>2.5</version.servlet.api>
+        <version.junit>4.4</version.junit>
+    </properties>
 
-      <dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>servlet-api</artifactId>
-        <version>${version.servlet.api}</version>
-      </dependency>
-
-      <!-- test dependencies -->
-
-      <dependency>
-        <groupId>org.jboss.test</groupId>
-        <artifactId>jboss-test</artifactId>
-        <version>${version.org.jboss.test}</version>
-        <scope>test</scope>
-      </dependency>
-      
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>${version.junit}</version>
-        <scope>test</scope>
-      </dependency>
-      
-    </dependencies>
-  </dependencyManagement>
-
-  <profiles>
-    <profile>
-      <id>default</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <properties>
-        <microcontainer.outputDirectory>target/classes</microcontainer.outputDirectory>
-        <microcontainer.testOutputDirectory>target/test-classes</microcontainer.testOutputDirectory>
-      </properties>
-    </profile>
-    <profile>
-      <id>eclipse</id>
-      <build>
-        <defaultGoal>process-test-resources</defaultGoal>
+    <build>
+        <finalName>${artifactId}</finalName>
         <plugins>
-          <plugin>
-            <artifactId>maven-eclipse-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>eclipse</id>
-                <phase>process-test-resources</phase>
-                <goals>
-                  <goal>eclipse</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <downloadSources>true</downloadSources>
-              <buildOutputDirectory>${microcontainer.outputDirectory}</buildOutputDirectory>
-            </configuration>
-          </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <showDeprecation>true</showDeprecation>
+                    <showWarnings>true</showWarnings>
+                    <optimize>true</optimize>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>${version.release.plugin}</version>
+                <configuration>
+                    <tagBase>https://svn.jboss.org/repos/jbossas/projects/jboss-seam-int/tags</tagBase>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                </configuration>
+            </plugin>
         </plugins>
-      </build>
-      <properties>
-        <microcontainer.outputDirectory>eclipse-target/classes</microcontainer.outputDirectory>
-        <microcontainer.testOutputDirectory>eclipse-target/test-classes</microcontainer.testOutputDirectory>
-      </properties>
-    </profile>
-  </profiles>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>make-assembly</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>attached</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-idea-plugin</artifactId>
+                    <configuration>
+                        <downloadSources>true</downloadSources>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${version.jar.plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${version.surefire.plugin}</version>
+                    <configuration>
+                        <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                        <includes>
+                            <include>org/jboss/test/**/*TestCase.java</include>
+                        </includes>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <!-- Configure javadoc plugin with APIviz -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <configuration>
+                        <doclet>net.gleamynode.apiviz.APIviz</doclet>
+                        <docletArtifact>
+                            <groupId>net.gleamynode.apiviz</groupId>
+                            <artifactId>apiviz</artifactId>
+                            <version>1.1.0</version>
+                        </docletArtifact>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <repositories>
+        <!-- APIviz repository -->
+        <repository>
+            <id>apiviz.release</id>
+            <name>APIviz releases</name>
+            <url>http://apiviz.googlecode.com/svn/site/repo/mvn/release</url>
+            <releases>
+
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <dependencyManagement>
+        <!-- The parent pom manages the inter-dependencies of the modules. -->
+        <dependencies>
+            <dependency>
+                <groupId>org.jboss.seam</groupId>
+                <artifactId>jboss-seam</artifactId>
+                <version>${version.jboss.seam}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss</groupId>
+                <artifactId>jboss-vfs</artifactId>
+                <version>${version.jboss.vfs}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>${version.servlet.api}</version>
+            </dependency>
+
+            <!-- test dependencies -->
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${version.junit}</version>
+                <scope>test</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 
 </project>

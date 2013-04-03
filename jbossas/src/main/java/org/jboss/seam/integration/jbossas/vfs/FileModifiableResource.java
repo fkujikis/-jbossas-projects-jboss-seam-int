@@ -25,29 +25,25 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * File delegate to ModifieableResource.
+ * File delegate to ModifiableResource.
  *
  * @author <a href="mailto:ales.justin@jboss.org">Ales Justin</a>
  */
-public class FileModifiableResource implements ModifiableResource
-{
-   private File file;
+public class FileModifiableResource implements ModifiableResource {
+    private File file;
 
-   protected File getFile()
-   {
-      if (file == null)
-         throw new IllegalArgumentException("No file set.");
+    protected File getFile() {
+        if (file == null)
+            throw new IllegalArgumentException("No file set.");
 
-      return file;
-   }
+        return file;
+    }
 
-   public void setFile(File file)
-   {
-      this.file = file;
-   }
+    public void setFile(File file) {
+        this.file = file;
+    }
 
-   public long getLastModified() throws IOException
-   {
-      return getFile().lastModified();
-   }
+    public long getLastModified() throws IOException {
+        return getFile().lastModified();
+    }
 }
