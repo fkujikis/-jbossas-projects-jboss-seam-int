@@ -141,6 +141,8 @@ public class VFSScanner extends AbstractScanner {
                             urlPath = urlPath.substring(0, p);
                         }
                         adapter.handlePath(urlPath);
+                        checkLastModified(adapter.getTimestamp());
+
                     }
                 }
             } catch (IOException ioe) {
@@ -222,6 +224,15 @@ public class VFSScanner extends AbstractScanner {
      */
     private void touchTimestamp(ModifiableResource file) throws IOException {
         long lastModified = file.getLastModified();
+        checkLastModified(lastModified);
+    }
+
+    /**
+     * Update timestamp.
+     *
+     * @param lastModified the last modified value
+     */
+    private void checkLastModified(long lastModified) {
         if (lastModified > timestamp) {
             timestamp = lastModified;
         }
