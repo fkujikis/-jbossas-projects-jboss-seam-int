@@ -12,13 +12,10 @@
     <packaging>pom</packaging>
     <name>JBoss Seam Int Aggregator</name>
     <url>http://www.jboss.org/jbossmc/</url>
-    <description>
-        JBoss ClassLoader Parent POM
-    </description>
+    <description>JBoss Seam2 Integration</description>
     <scm>
         <connection>scm:svn:http://anonsvn.jboss.org/repos/jbossas/projects/jboss-seam-int/trunk/</connection>
-        <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/jboss-seam-int/trunk/
-        </developerConnection>
+        <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/jboss-seam-int/trunk/</developerConnection>
         <url>http://viewvc.jboss.org/cgi-bin/viewvc.cgi/jbossas/projects/jboss-seam-int/trunk/</url>
     </scm>
 
@@ -34,7 +31,7 @@
     </properties>
 
     <build>
-        <finalName>${artifactId}</finalName>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -61,30 +58,6 @@
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-assembly-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <id>make-assembly</id>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>attached</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-idea-plugin</artifactId>
-                    <configuration>
-                        <downloadSources>true</downloadSources>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>${version.jar.plugin}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${version.surefire.plugin}</version>
                     <configuration>
@@ -94,39 +67,9 @@
                         </includes>
                     </configuration>
                 </plugin>
-                <plugin>
-                    <!-- Configure javadoc plugin with APIviz -->
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <configuration>
-                        <doclet>net.gleamynode.apiviz.APIviz</doclet>
-                        <docletArtifact>
-                            <groupId>net.gleamynode.apiviz</groupId>
-                            <artifactId>apiviz</artifactId>
-                            <version>1.1.0</version>
-                        </docletArtifact>
-                        <encoding>UTF-8</encoding>
-                    </configuration>
-                </plugin>
             </plugins>
         </pluginManagement>
     </build>
-
-    <repositories>
-        <!-- APIviz repository -->
-        <repository>
-            <id>apiviz.release</id>
-            <name>APIviz releases</name>
-            <url>http://apiviz.googlecode.com/svn/site/repo/mvn/release</url>
-            <releases>
-
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 
     <dependencyManagement>
         <!-- The parent pom manages the inter-dependencies of the modules. -->
