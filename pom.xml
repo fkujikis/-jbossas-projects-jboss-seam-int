@@ -27,6 +27,8 @@
         <version.jboss.vfs>3.1.0.Final</version.jboss.vfs>
         <version.servlet.api>2.5</version.servlet.api>
         <version.junit>4.4</version.junit>
+        <!-- Maven -->
+        <version.release.plugin>2.4.2</version.release.plugin>
     </properties>
 
     <build>
