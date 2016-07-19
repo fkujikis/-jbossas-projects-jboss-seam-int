@@ -1,0 +1,75 @@
+
+ - Getting new chagnes from SVN will only work in the migration directory created by the svn2git tool
+ - Proceeding requires SSH access to shell.devel.redhat.com
+ - Assuming svn2git is installed (https://github.com/nirvdrum/svn2git)
+ - Assuming below setup is present in your ~/.ssh/config and scp is configured for use
+
+	Host devel
+	  Hostname shell.devel.redhat.com
+	  User $USER
+	  IdentityFile ~/.ssh/id_rsa
+
+
+-------------
+  PROCEDURE
+-------------
+
+
+ 1. Copy the svn2git  directory from shell.devel.redhat.com
+
+	scp -r devel:/home/remote/fkujikis/svn2git_repos/jbossas-projects-jboss-seam-int-svn2git /my/local/dir/jbossas-projects-jboss-seam-int-svn2git
+
+ 2. Extract authors file from this 'Doc' branch to accessible location, e.g.:
+
+	cp authors.txt /tmp/svn2git/authors.txt
+
+ 3. Navigate to copied directory 
+
+	cd /my/local/dir/jbossas-projects-jboss-seam-int-svn2git
+
+ 4. Ensure the authors file and SVN url are correctly referenced in .git/config
+
+	gedit /my/local/dir/jbossas-projects-jboss-seam-int-svn2git/.git/config
+
+	[core]
+		repositoryformatversion = 0
+		filemode = true
+		bare = false
+		logallrefupdates = true
+	[svn-remote "svn"]
+		url = https://anonsvn.jboss.org/repos/jbossas
+		fetch = projects/jboss-seam-int/trunk:refs/remotes/svn/trunk
+		branches = projects/jboss-seam-int/branches/*:refs/remotes/svn/*
+		tags = projects/jboss-seam-int/tags/*:refs/remotes/svn/tags/*
+	[svn]
+		authorsfile = /tmp/svn2git/authors.txt
+
+ 5. Run svn2git with rebase options:
+
+	svn2git --rebase
+
+ 6. Any new commits should now be present. The tool doesn't import new branches/tags so they have to be created manually:
+
+	https://github.com/nirvdrum/svn2git/issues/87
+ 	https://github.com/nirvdrum/svn2git/issues/149
+
+	For each missing tag recreate by:
+
+		git show svn/tags/[TAG-NAME]
+		# from the above get the commit ref and log
+
+		git tag -a -m "[LOG MESSAGE]" [TAG-NAME] [COMMIT REF]
+
+ 7. When you have the right result:
+	- push the new changes to the internal git repo
+	- update devel:/home/remote/fkujikis/svn2git_repos/jbossas-projects-jboss-seam-int-svn2git with your local copy 
+
+
+
+
+
+
+
+	
+
+
