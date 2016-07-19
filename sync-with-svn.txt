@@ -63,7 +63,7 @@
  7. When you have the right result:
 	- push the new changes to the internal git repo
 	- update devel:/home/remote/fkujikis/svn2git_repos/jbossas-projects-jboss-seam-int-svn2git with your local copy 
-
+	  scp -r /my/local/dir/jbossas-projects-jboss-seam-int-svn2git devel:/home/remote/fkujikis/svn2git_repos/jbossas-projects-jboss-seam-int-svn2git
 
 
 
